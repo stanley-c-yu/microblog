@@ -1,0 +1,18 @@
+<!-- Creates a "base" template that index.html can now inherit and modify using Jinja2 template inheritance. 
+Other htmls can inherit from base too.  This allows us to have multiple pages with the same look and feel. 
+ --> 
+
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - Microblog</title>
+      {% else %}
+      <title>Welcome to Microblog</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>Microblog: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>

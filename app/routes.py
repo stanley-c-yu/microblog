@@ -3,7 +3,8 @@
 #	- View Functions are mapped to one or more route URLs so that Flask knows what logic to execute 
 #	  when a client requests a given URL.  
 
-#Imports app module
+#Imports instance of Flask defined as "app" in __init__.py into routes.py
+from flask import render_template
 from app import app
 
 #The two @app.route lines of code are Python Decorators.  Decorators are used to modify functions that follow it.  
@@ -13,4 +14,21 @@ from app import app
 @app.route('/')
 @app.route('/index')
 def index():
-    return "Hello, World!"
+    user = {'username': 'Miguel'}
+    posts = [
+        {
+            'author': {'username': 'John'},
+            'body': 'Beautiful day in Portland!'
+        },
+        {
+            'author': {'username': 'Susan'},
+            'body': 'The Avengers movie was so cool!'
+        }
+    ]
+    return render_template('index.html', title='Home', user=user, posts=posts)
+
+ 
+#The render_template() function invokes the Jinja2 template engine that comes bundled with the Flask framework. 
+#Jinja2 substitutes {{ ... }} blocks with the corresponding values, given by the arguments provided 
+#in the render_template() call. Note that GitHub Pages doesn't support dynamic elements, so we'll have to axe 
+#this when implementing a Flask web app on GH Pages. 
